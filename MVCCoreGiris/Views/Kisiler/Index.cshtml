@@ -1,0 +1,44 @@
+﻿@model List<Kisi>
+@{
+    ViewData["Title"] = "Kişiler";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<a asp-action="Yeni" class="btn btn-outline-info"><i class="fas fa-plus"></i> Yeni Kişi</a>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Kişi Adı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.KisiAd</td>
+                <td>
+                    <a asp-action="Duzenle" asp-route-id="@item.Id">Düzenle</a>
+                    <a href="#" onclick="sil(@item.Id, '@item.KisiAd')">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="Sil" name="silForm">
+    <input type="hidden" name="id"/>
+</form>
+@section scripts{ 
+<script>
+    function sil(id, kisiAd) {
+        event.preventDefault();
+        if (confirm('"' + kisiAd + '"' + " adlı kişi silinecektir. Onaylıyor musunuz?")) {
+            document.silForm.elements.id.value = id;
+            document.silForm.submit();
+        }
+    }
+</script>
+}
