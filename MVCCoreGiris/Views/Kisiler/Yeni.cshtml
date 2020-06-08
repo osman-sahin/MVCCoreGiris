@@ -1,5 +1,5 @@
 ﻿@model MVCCoreGiris.Models.Kisi
-
+@inject LuckyNumberService lns
 @{
     ViewData["Title"] = "Yeni";
 }
@@ -27,6 +27,9 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+Şanslı Sayınız: @ViewBag.SansliSayi
+Şanslı Sayınız: @lns.LuckyNumber
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

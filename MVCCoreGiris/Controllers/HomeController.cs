@@ -6,26 +6,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVCCoreGiris.Models;
+using MVCCoreGiris.Services;
 
 namespace MVCCoreGiris.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly LuckyNumberService _luckyNumberService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, LuckyNumberService luckyNumberService)
         {
             _logger = logger;
+            _luckyNumberService = luckyNumberService;
         }
 
         public IActionResult Index()
         {
+            ViewBag.SansliSayi = _luckyNumberService.LuckyNumber;  ///////
             ViewBag.Deneme = "Merhaba .NET Core!";
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy([FromServices] LuckyNumberService luckyNumberService)
         {
+            ViewBag.SansliSayi = luckyNumberService.LuckyNumber;  ///////
             return View();
         }
 

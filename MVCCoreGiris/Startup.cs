@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVCCoreGiris.Models;
+using MVCCoreGiris.Services;
 
 namespace MVCCoreGiris
 {
@@ -30,6 +31,8 @@ namespace MVCCoreGiris
 
             // https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-3.1&tabs=visual-studio
             services.AddDbContext<OkulContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OkulContext")));
+
+            services.AddSingleton<LuckyNumberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
