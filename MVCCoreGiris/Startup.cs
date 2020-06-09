@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVCCoreGiris.Interfaces;
 using MVCCoreGiris.Models;
 using MVCCoreGiris.Services;
 
@@ -33,6 +34,10 @@ namespace MVCCoreGiris
             services.AddDbContext<OkulContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OkulContext")));
 
             services.AddSingleton<LuckyNumberService>();
+
+            // services.AddScoped<IWeatherService, WeatherComService>();
+            // services.AddScoped<IWeatherService, MeteorGovService>();
+            services.AddScoped<IWeatherService, OpenWeatherMapService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
